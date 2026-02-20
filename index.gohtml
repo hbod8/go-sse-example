@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Go Server</title>
+        <script>
+            const eventSource = new EventSource("/events");
+
+            eventSource.addEventListener("chat", (event) => {
+                const parsed = JSON.parse(event.data);
+                const e = document.createElement("p");
+                e.textContent = parsed.Message;
+                const t = document.querySelector("div.events");
+                t.appendChild(e);
+            });
+        </script>
+    </head>
+    <body>
+        <p>Hello {{ .Name }}</p>
+        <p>Events:</p>
+        <div class="events"></div>
+    </body>
+</html>
